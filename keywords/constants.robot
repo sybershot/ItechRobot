@@ -2,8 +2,8 @@
 ${STEAM_URL}  https://store.steampowered.com/
 ${LOGIN_URL}  https://store.steampowered.com/login/
 
-${INVALID_USERNAME}  U6ycW1a^NL!IELLX
-${INVALID_PASSWORD}  U6ycW1a^NL!IELLX
+${INVALID_USERNAME}  U6ycW1a^NL!IELOL
+${INVALID_PASSWORD}  U6ycW1a^NL!IEKEK
 
 ${LOGIN_LINK_LOCATOR}  //a[@class="global_action_link"]
 ${LOGIN_BUTTON_LOCATOR}  //button[@class="btn_blue_steamui btn_medium login_btn"]

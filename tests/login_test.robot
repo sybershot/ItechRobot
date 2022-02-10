@@ -21,14 +21,13 @@ Click on login link
     Wait Until Page Contains Element  ${LOGIN_BUTTON_LOCATOR}
     Should Contain  ${current_url}  ${LOGIN_URL}
 
-Enter invalid credentials
+Login with invalid credentials
     Input Text  ${USERNAME_FIELD_LOCATOR}  ${INVALID_USERNAME}
     Input Text  ${PASSWORD_FIELD_LOCATOR}  ${INVALID_PASSWORD}
-
-Click login button
     Click Button  ${LOGIN_BUTTON_LOCATOR}
 
 Wait for errors
     Wait Until Element Is Visible  ${ERROR_DISPLAY_LOCATOR}
+    Sleep  1 sec
     Capture Page Screenshot  invalid-credentials-attempt.png
 
