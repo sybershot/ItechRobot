@@ -11,6 +11,10 @@ Test case:
 
 # Requirements
 - Robot Framework 4.1.3
-- SeleniumLibrary 6.0.0
+- Webdriver Manager 3.5.2
 
 Dependencies are listed in requirements.txt.
+
+# Usage
+Launch `login_test.robot` from `./project/tests/` directory with
+`-V configuration/constants.py project/tests/login_test.robot` arguments.
