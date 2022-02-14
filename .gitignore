@@ -132,5 +132,6 @@ dmypy.json
 *.png
 *.html
 *.xml
-utils/drivers/*
-utils/drivers/!.gitkeep
+framework/utils/drivers/*
+framework/utils/drivers/!.gitkeep
+framework/utils/*.json

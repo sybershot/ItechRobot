@@ -1,7 +1,10 @@
 *** Settings ***
-Library  SeleniumLibrary
+Library  framework/utils/drivermanager/driver_manager.py
+
 
 
 *** Keywords ***
-Open Firefox Browser
-    Open Browser  executable_path=utils/drivers/geckodriver.exe  service_log_path=/dev/null
+Open Browser
+    [Arguments]  ${browser_type}=Firefox
+    ${browser} =  get_browser  ${browser_type}
+    [Return]  ${browser}
