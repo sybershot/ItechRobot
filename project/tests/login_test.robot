@@ -6,6 +6,8 @@ Suite Teardown  Close Browser
 Test Teardown  Run keyword if test failed  Fatal Error  Step failed
 
 *** Test Cases ***
+[Documentation]  This test verifies error assertion when user logs in with incorrect credentials
+[Tags]  Sanity
 Open steam page
     Go To  ${STEAM_URL}
     Wait until element  xpath  ${LOGIN_LINK_LOCATOR}
