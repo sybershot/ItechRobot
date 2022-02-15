@@ -1,4 +1,7 @@
 *** Settings ***
+Documentation  This test verifies error assertion when user logs in with incorrect credentials
+Default Tags  Smoke
+
 Variables  configuration/constants.py
 Library  framework/utils/drivermanager/RobotBrowser.py  ${BROWSER_TYPE}
 
@@ -9,8 +12,6 @@ Test Teardown  Run keyword if test failed  Fatal Error  Step failed
 *** Test Cases ***
 
 Open steam page
-    [Documentation]  This test verifies error assertion when user logs in with incorrect credentials
-    [Tags]  Sanity
     Go To  ${STEAM_URL}
     Wait until element  xpath  ${LOGIN_LINK_LOCATOR}
     ${current_url} =  Get Location
