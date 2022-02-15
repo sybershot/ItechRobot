@@ -16,5 +16,4 @@ Test case:
 Dependencies are listed in requirements.txt.
 
 # Usage
-Launch `login_test.robot` from `./project/tests/` directory with
-`-V configuration/constants.py project/tests/login_test.robot` arguments.
+Launch `login_test.robot` from `./project/tests/` directory.

@@ -1,14 +1,16 @@
 *** Settings ***
-Library  framework/utils/drivermanager/RobotBrowser.py  Firefox
+Variables  configuration/constants.py
+Library  framework/utils/drivermanager/RobotBrowser.py  ${BROWSER_TYPE}
 
 
 Suite Teardown  Close Browser
 Test Teardown  Run keyword if test failed  Fatal Error  Step failed
 
 *** Test Cases ***
-[Documentation]  This test verifies error assertion when user logs in with incorrect credentials
-[Tags]  Sanity
+
 Open steam page
+    [Documentation]  This test verifies error assertion when user logs in with incorrect credentials
+    [Tags]  Sanity
     Go To  ${STEAM_URL}
     Wait until element  xpath  ${LOGIN_LINK_LOCATOR}
     ${current_url} =  Get Location
