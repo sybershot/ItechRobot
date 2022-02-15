@@ -63,4 +63,6 @@ class RobotBrowser:
 
     @keyword(name='Capture page screenshot')
     def capture_page_screenshot(self, file_name):
-        self.driver.save_screenshot(file_name)
+        image_path = file_name + '.png'
+        self.driver.save_screenshot(image_path)
+        info(f'<img src="{image_path}">', html=True)

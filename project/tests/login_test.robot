@@ -30,5 +30,5 @@ Login with invalid credentials
 Wait for errors
     Wait Until Visible  xpath  ${ERROR_DISPLAY_LOCATOR}
     Sleep  1 sec
-    Capture Page Screenshot  invalid-credentials-attempt.png
+    Capture Page Screenshot  invalid-credentials-attempt
 
