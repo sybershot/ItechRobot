@@ -1,21 +1,19 @@
 from robot.api.deco import keyword
-from robot.api.logger import info, debug, error
+from robot.api.logger import info, debug
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from config import TIMEOUT
-from framework.utils.drivermanager.driver_manager import BrowserManager
+from configuration.constants import TIMEOUT
+from framework.utils.drivermanager.driver_factory import DriverFactory
 
 
 class ElementNotFound(Exception):
     pass
 
 
-class RobotBrowser:
-    ROBOT_LIBRARY_SCOPE = 'GLOBAL'
-
-    def __init__(self, browser_type):
-        self.driver: WebDriver = BrowserManager.get_browser(browser_type)
+class Browser:
+    def __init__(self, driver):
+        self.driver = driver
 
     def _find_element_or_raise(self, by, locator):
         info(f'Searching element {(by, locator)!r}')
@@ -23,6 +21,10 @@ class RobotBrowser:
             return element
         else:
             raise ElementNotFound(f'Failed to find element {(by, locator)!r}!')
+
+    @keyword(name='Find Element')
+    def find_element(self, by, locator):
+        return self._find_element_or_raise(by, locator)
 
     @keyword(name='Wait until element')
     def wait_until_element(self, by, locator):
