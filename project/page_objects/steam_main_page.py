@@ -5,10 +5,10 @@ from framework.utils.base_page.base_page import BasePage
 class SteamMainPage(BasePage):
     @property
     def login_button(self):
-        return self.browser.find_element('xpath', LOGIN_LINK_LOCATOR)
+        return 'xpath', LOGIN_LINK_LOCATOR
 
     def click_login(self):
-        self.login_button.click()
+        self.browser.click_element(*self.login_button)
 
     @property
     def install_steam_button(self):

@@ -4,7 +4,6 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from configuration.constants import TIMEOUT
-from framework.utils.drivermanager.driver_factory import DriverFactory
 
 
 class ElementNotFound(Exception):
@@ -12,15 +11,16 @@ class ElementNotFound(Exception):
 
 
 class Browser:
-    def __init__(self, driver):
+    def __init__(self, driver, name):
         self.driver = driver
+        self.name = name
 
     def _find_element_or_raise(self, by, locator):
-        info(f'Searching element {(by, locator)!r}')
+        info(f'Searching element {by!r} {locator!r}')
         if element := self.driver.find_element(by, locator):
             return element
         else:
-            raise ElementNotFound(f'Failed to find element {(by, locator)!r}!')
+            raise ElementNotFound(f'Failed to find element {by!r} {locator!r}!')
 
     @keyword(name='Find Element')
     def find_element(self, by, locator):
@@ -28,12 +28,12 @@ class Browser:
 
     @keyword(name='Wait until element')
     def wait_until_element(self, by, locator):
-        info(f'Waiting for {(by, locator)!r}')
+        info(f'Waiting for {by!r} {locator!r}')
         if element := WebDriverWait(self.driver, TIMEOUT).until(EC.presence_of_element_located((by, locator))):
-            debug(f'Successfully located {(by, locator)!r}')
+            debug(f'Successfully located {by!r} {locator!r}')
             return element
         else:
-            raise ElementNotFound(f'Failed to find element {(by, locator)!r}!')
+            raise ElementNotFound(f'Failed to find element {by!r} {locator!r}!')
 
     @keyword(name='Close browser')
     def close_browser(self):
@@ -50,17 +50,17 @@ class Browser:
 
     @keyword(name='Input text')
     def input_text(self, by, locator, text):
-        info(f'Sending {text!r} to {(by, locator)!r}')
         self._find_element_or_raise(by, locator).send_keys(text)
+        info(f'Sending {text!r} to {by!r} {locator!r}')
 
     @keyword(name='Click element')
     def click_element(self, by, locator):
-        info(f'Clicking {(by, locator)!r}')
         self._find_element_or_raise(by, locator).click()
+        info(f'Clicking {by!r} {locator!r}')
 
     @keyword(name='Wait until visible')
     def wait_until_visible(self, by, locator):
-        info(f'Waiting until {(by, locator)!r} is visible')
+        info(f'Waiting until {by!r} {locator!r} is visible')
         WebDriverWait(self.driver, TIMEOUT).until(EC.visibility_of_element_located((by, locator)))
 
     @keyword(name='Capture page screenshot')

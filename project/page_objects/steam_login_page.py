@@ -7,21 +7,24 @@ class SteamLoginPage(BasePage):
 
     @property
     def username_input(self):
-        return self.browser.find_element('xpath', USERNAME_FIELD_LOCATOR)
+        return 'xpath', USERNAME_FIELD_LOCATOR
 
     @property
     def password_input(self):
-        return self.browser.find_element('xpath', PASSWORD_FIELD_LOCATOR)
+        return 'xpath', PASSWORD_FIELD_LOCATOR
 
     @property
     def login_button(self):
-        return self.browser.find_element('xpath', LOGIN_BUTTON_LOCATOR)
+        return 'xpath', LOGIN_BUTTON_LOCATOR
 
     @property
     def error_message_box(self):
-        return self.browser.find_element('xpath', ERROR_MESSAGE_BOX_LOCATOR)
+        return 'xpath', ERROR_MESSAGE_BOX_LOCATOR
 
     def login(self, login, password):
-        self.username_input.send_keys(login)
-        self.password_input.send_keys(password)
-        self.login_button.click()
+        self.browser.input_text(*self.username_input, login)
+        self.browser.input_text(*self.password_input, password)
+        self.browser.click_element(*self.login_button)
+
+    def wait_until_error_message_visible(self):
+        self.browser.wait_until_visible(self.error_message_box)

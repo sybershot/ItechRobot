@@ -28,15 +28,15 @@ def validate_page_is(browser: Browser, expected_url):
 @keyword(name="Go to Login page")
 def go_to_steam_page(browser: Browser):
     browser.go_to(LOGIN_URL)
-    return SteamMainPage(browser)
+    return SteamLoginPage(browser)
 
 
-@keyword(name="Login with invalid credentials")
-def login_with_invalid_credentials(page: SteamLoginPage, login, password):
+@keyword(name="Login with credentials")
+def login_with_credentials(page: SteamLoginPage, login, password):
     page.login(login, password)
 
 
-@keyword(name="Find error message")
-def find_error_message(page: SteamLoginPage):
-    WebDriverWait(page.browser.driver, TIMEOUT).until(EC.visibility_of(page.error_message_box))
+@keyword(name="Capture error message")
+def capture_error_message(page: SteamLoginPage):
+    page.save_screenshot('invalid-credentials-attempt')
 
