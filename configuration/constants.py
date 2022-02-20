@@ -12,4 +12,4 @@ LOGIN_BUTTON_LOCATOR = '//button[@class="btn_blue_steamui btn_medium login_btn"]
 USERNAME_FIELD_LOCATOR = '//input[@id="input_username"]'
 PASSWORD_FIELD_LOCATOR = '//input[@id="input_password"]'
 ERROR_MESSAGE_BOX_LOCATOR = '//*[@id="error_display"]'
-
+ERROR_MESSAGE_VISIBLE_LOCATOR = '//*[@id="error_display" and @style=""]'

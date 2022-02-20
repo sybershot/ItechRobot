@@ -3,6 +3,7 @@ from framework.utils.base_page.base_page import BasePage
 
 
 class SteamMainPage(BasePage):
+
     @property
     def login_button(self):
         return 'xpath', LOGIN_LINK_LOCATOR
