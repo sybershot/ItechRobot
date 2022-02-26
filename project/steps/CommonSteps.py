@@ -1,4 +1,5 @@
 from robot.api.deco import keyword
+from robot.libraries.BuiltIn import BuiltIn
 
 from configuration.constants import STEAM_URL
 from framework.utils.browser_manager.browser import Browser
@@ -17,3 +18,8 @@ class CommonSteps:
     @keyword(name='Save page screenshot')
     def save_page_screenshot(page, file_name):
         page.save_screenshot(file_name)
+
+    @staticmethod
+    @keyword(name='Validate page is')
+    def validate_page_is(browser: Browser, expected_url):
+        BuiltIn().should_be_equal(browser.get_location(), expected_url)

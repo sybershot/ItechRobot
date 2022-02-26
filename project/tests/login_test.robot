@@ -14,10 +14,10 @@ Test Teardown  Run keyword if test failed  Fatal Error  Step failed
 
 *** Test Cases ***
 
-
-Log in With Invalid Credentials
+Log In With Invalid Credentials
+    ${invalid_username}  ${invalid_password}  Load From JSON File  Invalid
     ${page_object} =  Go To Login Page  ${page_object}
-    Login With Credentials  ${page_object}  ${INVALID_USERNAME}  ${INVALID_PASSWORD}
+    Login With Credentials  ${page_object}  ${invalid_username}  ${invalid_password}
     Wait Until Error Visible  ${page_object}
     Capture Error Message  ${page_object}
 

@@ -1,6 +1,7 @@
 from robot.api.deco import keyword
 from robot.api.logger import info, debug
 from selenium.webdriver.remote.webdriver import WebDriver
+from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from configuration.constants import TIMEOUT
@@ -12,10 +13,10 @@ class ElementNotFound(Exception):
 
 class Browser:
     def __init__(self, driver, name):
-        self.driver = driver
+        self.driver: WebDriver = driver
         self.name = name
 
-    def _find_element_or_raise(self, by, locator):
+    def _find_element_or_raise(self, by, locator) -> WebElement:
         info(f'Searching element {by!r} {locator!r}')
         if element := self.driver.find_element(by, locator):
             return element
@@ -61,10 +62,14 @@ class Browser:
     @keyword(name='Wait until visible')
     def wait_until_visible(self, by, locator):
         info(f'Waiting until {by!r} {locator!r} is visible')
-        WebDriverWait(self.driver, TIMEOUT).until(EC.visibility_of_element_located((by, locator)))
+        return WebDriverWait(self.driver, TIMEOUT).until(EC.visibility_of_element_located((by, locator)))
 
     @keyword(name='Capture page screenshot')
     def capture_page_screenshot(self, file_name):
         image_path = file_name + '.png'
         self.driver.save_screenshot(image_path)
         info(f'<img src="{image_path}">', html=True)
+
+    def find_elements(self, by, locator):
+        info(f'Searching all elements by {by!r} {locator!r}')
+        return self.driver.find_elements(by, locator)
