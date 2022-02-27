@@ -59,7 +59,3 @@ class SteamGameInfo:
                 orig_price = final_price
             discount = 0.0
         return SteamGameInfo(name, supported_os, orig_price, final_price, discount)
-
-    @staticmethod
-    def make_set(game_info):
-        return {game_info.game_title, game_info.final_price}

@@ -82,14 +82,17 @@ class SteamStoreSteps:
     @staticmethod
     @keyword(name="Compare info")
     def compare_games(from_carousel: List[SteamGameInfo], suggested: SteamGameInfo, game_page: SteamGameInfo):
-        game_from_carousel = SteamGameInfo.make_set(from_carousel[0])
-        from_suggested = SteamGameInfo.make_set(suggested)
-        from_game_page = SteamGameInfo.make_set(game_page)
+        game_from_carousel = from_carousel[0]
+        info_ok = False
         info(f'Passed Game information:\n'
              f'From main page: {game_from_carousel!r}\n'
-             f'From suggested games list: {from_suggested!r}\n'
-             f'From game page: {from_game_page!r}')
-        if game_from_carousel == from_suggested == from_game_page:
+             f'From suggested games list: {suggested!r}\n'
+             f'From game page: {game_page!r}')
+        if game_from_carousel.game_title == suggested.game_title == game_page.game_title:
+            if game_from_carousel.final_price == suggested.final_price == game_page.game_title:
+                info_ok = True
+
+        if info_ok:
             info("All of the fetched fetched data for game is equal!")
             return True
         else:
