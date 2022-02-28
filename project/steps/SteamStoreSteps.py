@@ -8,14 +8,13 @@ from robot.api.deco import keyword
 from robot.output.librarylogger import info
 from selenium.webdriver import ActionChains
 from selenium.webdriver.remote.webelement import WebElement
-
-from configuration.constants import STEAM_SUBGENRES_LOCATOR
 from project.dataclasses.steam_game_info import SteamGameInfo, PRICE_PATTERN
 from project.page_objects.steam_game_page import SteamGamePage
 from project.page_objects.steam_main_page import SteamMainPage
 from project.page_objects.steam_store_page import SteamStorePage
 
 GAME_MATCH_LOCATOR = 'xpath', '//a[contains(@class, "match")]'
+STEAM_SUBGENRES_LOCATOR = './child::a[@class="popup_menu_item"]'
 
 
 class SteamStoreSteps:

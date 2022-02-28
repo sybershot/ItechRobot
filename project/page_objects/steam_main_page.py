@@ -1,10 +1,15 @@
 from typing import List
 
 from selenium.webdriver.remote.webelement import WebElement
-
-from configuration.constants import LOGIN_LINK_LOCATOR, DOWNLOAD_LINK_LOCATOR, STEAM_GENRES_LOCATOR, \
-    STEAM_GENRE_MENU_LOCATOR, STEAM_SEARCH_BAR_LOCATOR, STEAM_SEARCH_SUGGEST_LOCATOR
 from framework.utils.base_page.base_page import BasePage
+
+LOGIN_LINK_LOCATOR = '//a[@class="global_action_link"]'
+DOWNLOAD_LINK_LOCATOR = '//a[@class="header_installsteam_btn_content"]'
+STEAM_GENRES_LOCATOR = '//div[@class="popup_genre_expand_content responsive_hidden" and @data-genre-group and ' \
+                       'not(@data-genre-group="themes") and not(@data-genre-group="social_and_players")]'
+STEAM_GENRE_MENU_LOCATOR = '//div[@id="genre_tab"]'
+STEAM_SEARCH_BAR_LOCATOR = '//input[@id="store_nav_search_term"]'
+STEAM_SEARCH_SUGGEST_LOCATOR = '//div[contains(@class, "search_suggest")]'
 
 
 class SteamMainPage(BasePage):

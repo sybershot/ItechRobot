@@ -1,10 +1,12 @@
 import os
 
-from robot.output.librarylogger import info, error
-
-from configuration.constants import DOWNLOAD_BUTTON_LOCATOR, DOWNLOADS_PATH
-from framework.utils.base_page.base_page import BasePage
 from requests import get
+from robot.output.librarylogger import info
+
+from configuration.constants import DOWNLOADS_PATH
+from framework.utils.base_page.base_page import BasePage
+
+DOWNLOAD_BUTTON_LOCATOR = '//a[@class="about_install_steam_link"]'
 
 
 class SteamDownloadPage(BasePage):

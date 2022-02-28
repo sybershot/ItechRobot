@@ -1,9 +1,10 @@
 from robot.api.deco import keyword
 from robot.libraries.BuiltIn import BuiltIn
 
-from configuration.constants import STEAM_URL
 from framework.utils.browser_manager.browser import Browser
 from project.page_objects.steam_main_page import SteamMainPage
+
+STEAM_URL = 'https://store.steampowered.com/'
 
 
 class CommonSteps:

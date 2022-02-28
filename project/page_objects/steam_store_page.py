@@ -2,9 +2,11 @@ import os
 import urllib.parse
 from typing import List
 
-from configuration.constants import STEAM_STORE_ITEM_LOCATOR, STEAM_STORE_GAMES_CAROUSEL_LOCATOR
 from framework.utils.browser_manager.browser import Browser
 from project.page_objects.steam_main_page import SteamMainPage
+
+STEAM_STORE_GAMES_CAROUSEL_LOCATOR = '//div[@class="tab_content_section_ctn"]'
+STEAM_STORE_ITEM_LOCATOR = '//div[contains(@id, "NewReleasesRows")]/a[contains(@class, "tab_item")]'
 
 
 class SteamStorePage(SteamMainPage):
