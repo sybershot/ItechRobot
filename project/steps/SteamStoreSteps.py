@@ -42,8 +42,8 @@ class SteamStoreSteps:
     @staticmethod
     @keyword(name="Check current genre")
     def get_genre_name(page: SteamStorePage):
-        info(f'Checking {page.current_genre!r} is equal to {page.expected_genre_link!r}')
-        assert page.current_genre == page.expected_genre_link
+        info(f'Checking {page.current_genre!r} in {page.expected_genre_link!r}')
+        assert page.current_genre in page.expected_genre_link
 
     @staticmethod
     @keyword(name="Get games list")

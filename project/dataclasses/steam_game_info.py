@@ -1,5 +1,5 @@
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import List
 
 from robot.api.logger import info
@@ -25,6 +25,10 @@ class SteamGameInfo:
     @staticmethod
     def get_steam_game(web_element: WebElement):
 
+        orig_price = 0.0
+        final_price = 0.0
+        discount = 0.0
+
         if game_name_element := web_element.find_elements(*GAME_NAME_LOCATOR):
             name = game_name_element[0].text
         else:
@@ -47,15 +51,11 @@ class SteamGameInfo:
             elif dirty_price := web_element.find_elements(*GAME_PRICE_APPHUB_LOCATOR):
                 dirty_price = dirty_price[0].text
             else:
-                dirty_price = 0.0
+                dirty_price = ""
 
             # Checking if the game is not free
             cleaned_price = re.search(PRICE_PATTERN, dirty_price.replace(',', '.'))
             if cleaned_price is not None:
                 final_price = float(cleaned_price[0])
                 orig_price = final_price
-            else:
-                final_price = 0.0
-                orig_price = final_price
-            discount = 0.0
         return SteamGameInfo(name, supported_os, orig_price, final_price, discount)
