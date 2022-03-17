@@ -8,6 +8,7 @@ from robot.api.deco import keyword
 from robot.output.librarylogger import info
 from selenium.webdriver import ActionChains
 from selenium.webdriver.remote.webelement import WebElement
+from smart_assertions import soft_assert, verify_expectations
 from project.dataclasses.steam_game_info import SteamGameInfo, PRICE_PATTERN
 from project.page_objects.steam_game_page import SteamGamePage
 from project.page_objects.steam_main_page import SteamMainPage
@@ -82,17 +83,12 @@ class SteamStoreSteps:
     @keyword(name="Compare info")
     def compare_games(from_carousel: List[SteamGameInfo], suggested: SteamGameInfo, game_page: SteamGameInfo):
         game_from_carousel = from_carousel[0]
-        info_ok = False
         info(f'Passed Game information:\n'
              f'From main page: {game_from_carousel!r}\n'
              f'From suggested games list: {suggested!r}\n'
              f'From game page: {game_page!r}')
-        if game_from_carousel.game_title == suggested.game_title == game_page.game_title:
-            if game_from_carousel.final_price == suggested.final_price == game_page.game_title:
-                info_ok = True
-
-        if info_ok:
-            info("All of the fetched fetched data for game is equal!")
-            return True
-        else:
-            return Exception("Some of the fetched data is not equal!")
+        soft_assert(game_from_carousel.game_title == suggested.game_title == game_page.game_title,
+                    "Titles are not equal!")
+        soft_assert(game_from_carousel.final_price == suggested.final_price == game_page.final_price,
+                    "Prices are not equal!")
+        verify_expectations()
