@@ -1,4 +1,4 @@
-from framework.utils.browser_manager.browser import Browser
+from framework.utils.robot_browser.browser import Browser
 
 
 class BasePage:

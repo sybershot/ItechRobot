@@ -1,11 +1,18 @@
 from robot.api.deco import keyword
 
-from browser import Browser
+from framework.utils.robot_browser.browser import Browser
 from driver_factory import DriverFactory
 
 
 class BrowserManager:
     ROBOT_LIBRARY_SCOPE = "GLOBAL"
+
+    __instance = None
+
+    def __new__(cls):
+        if not BrowserManager.__instance:
+            BrowserManager.__instance = super(BrowserManager, cls).__new__(cls)
+        return BrowserManager.__instance
 
     def __init__(self):
         self.browsers = {}

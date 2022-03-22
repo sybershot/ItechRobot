@@ -1,4 +1,6 @@
 from framework.utils.base_page.base_page import BasePage
+from framework.utils.robot_browser.browser import Browser
+from framework.utils.robot_browser.browser_element import BrowserElement
 
 LOGIN_BUTTON_LOCATOR = '//button[@class="btn_blue_steamui btn_medium login_btn"]'
 USERNAME_FIELD_LOCATOR = '//input[@id="input_username"]'
@@ -8,18 +10,11 @@ ERROR_MESSAGE_VISIBLE_LOCATOR = '//*[@id="error_display" and @style=""]'
 
 
 class SteamLoginPage(BasePage):
-
-    @property
-    def username_input(self):
-        return 'xpath', USERNAME_FIELD_LOCATOR
-
-    @property
-    def password_input(self):
-        return 'xpath', PASSWORD_FIELD_LOCATOR
-
-    @property
-    def login_button(self):
-        return 'xpath', LOGIN_BUTTON_LOCATOR
+    def __init__(self, browser: Browser):
+        super().__init__(browser)
+        self.login_button = BrowserElement('xpath', LOGIN_BUTTON_LOCATOR, browser)
+        self.username_input = BrowserElement('xpath', USERNAME_FIELD_LOCATOR, browser)
+        self.password_input = BrowserElement('xpath', PASSWORD_FIELD_LOCATOR, browser)
 
     @property
     def error_message_box(self):
@@ -30,9 +25,9 @@ class SteamLoginPage(BasePage):
         return 'xpath', ERROR_MESSAGE_VISIBLE_LOCATOR
 
     def login(self, login, password):
-        self.browser.input_text(*self.username_input, login)
-        self.browser.input_text(*self.password_input, password)
-        self.browser.click_element(*self.login_button)
+        self.username_input.input_text(login)
+        self.password_input.input_text(password)
+        self.login_button.click_element()
 
     def wait_until_error_message_visible(self):
         self.browser.wait_until_visible(*self.error_message_visible)

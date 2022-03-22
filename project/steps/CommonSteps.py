@@ -1,7 +1,7 @@
 from robot.api.deco import keyword
 from robot.libraries.BuiltIn import BuiltIn
 
-from framework.utils.browser_manager.browser import Browser
+from framework.utils.robot_browser.browser import Browser
 from project.page_objects.steam_main_page import SteamMainPage
 
 STEAM_URL = 'https://store.steampowered.com/'
