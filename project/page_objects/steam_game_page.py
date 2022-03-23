@@ -13,7 +13,7 @@ class SteamGamePage(BasePage):
 
     def __init__(self, browser: Browser):
         super().__init__(browser)
-        self.purchase_game_block = BrowserElement('xpath', self.PURCHASE_GAME_BLOCK_SELECTOR, browser)
+        self.purchase_game_block = BrowserElement.from_locator('xpath', self.PURCHASE_GAME_BLOCK_SELECTOR)
         self.game_discount_block = self._find_discount()
 
     def _find_discount(self):

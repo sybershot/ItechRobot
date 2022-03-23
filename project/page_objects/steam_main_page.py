@@ -20,10 +20,10 @@ class SteamMainPage(BasePage):
 
     def __init__(self, browser: Browser):
         super().__init__(browser)
-        self.login_button = BrowserElement('xpath', self.LOGIN_LINK_LOCATOR, browser)
-        self.install_steam_button = BrowserElement('xpath', self.DOWNLOAD_LINK_LOCATOR, browser)
-        self.search_bar = BrowserElement('xpath', self.STEAM_SEARCH_BAR_LOCATOR, browser)
-        self.steam_genre_menu = BrowserElement('xpath', self.STEAM_GENRE_MENU_LOCATOR, browser)
+        self.login_button = BrowserElement.from_locator('xpath', self.LOGIN_LINK_LOCATOR)
+        self.install_steam_button = BrowserElement.from_locator('xpath', self.DOWNLOAD_LINK_LOCATOR)
+        self.search_bar = BrowserElement.from_locator('xpath', self.STEAM_SEARCH_BAR_LOCATOR)
+        self.steam_genre_menu = BrowserElement.from_locator('xpath', self.STEAM_GENRE_MENU_LOCATOR)
 
     def click_login(self):
         self.login_button.click_element()
@@ -31,7 +31,7 @@ class SteamMainPage(BasePage):
     def click_install_steam(self):
         self.install_steam_button.click_element()
 
-    def get_genres(self) -> List[WebElement]:
+    def get_genres(self) -> list[BrowserElement]:
         self.steam_genre_menu.move_to_element()
         self.browser.wait_until_visible('xpath', self.STEAM_GENRES_LOCATOR)
         return self.browser.find_elements('xpath', self.STEAM_GENRES_LOCATOR)

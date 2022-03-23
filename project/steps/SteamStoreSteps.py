@@ -6,7 +6,6 @@ from typing import List
 
 from robot.api.deco import keyword
 from robot.output.librarylogger import info
-from selenium.webdriver import ActionChains
 from selenium.webdriver.remote.webelement import WebElement
 from smart_assertions import soft_assert, verify_expectations
 
@@ -27,10 +26,10 @@ class SteamStoreSteps:
         genre = random.choice(page.get_genres())
         subgenres = genre.find_elements('xpath', SteamStoreSteps.STEAM_SUBGENRES_LOCATOR)
         subgenre = random.choice(subgenres)
-        genre_link = subgenre.get_attribute('href')
+        genre_link = subgenre.element.get_attribute('href')
         genre_link = os.path.dirname(urllib.parse.urlsplit(genre_link).path)
         info(str(genre_link))
-        subgenre.click()
+        subgenre.click_element()
 
         return SteamStorePage(page.browser, genre_link)
 
@@ -56,7 +55,7 @@ class SteamStoreSteps:
         page.search_bar.click_element()
         page.search_bar.input_text(fetched_game.game_title)
         page.browser.wait_until_visible('xpath', SteamStorePage.STEAM_SEARCH_SUGGEST_LOCATOR)
-        game_match = BrowserElement('xpath', SteamStoreSteps.GAME_MATCH_LOCATOR, page.browser)
+        game_match = BrowserElement.from_locator('xpath', SteamStoreSteps.GAME_MATCH_LOCATOR)
         suggested_game_name, final_price = game_match.element.text.split("\n")
         if fetched_game.final_price != 0.0:
             final_price = float(re.search(PRICE_PATTERN, final_price.replace(*SteamGameInfo.COMMA_DOT))[0])
@@ -68,7 +67,7 @@ class SteamStoreSteps:
     @staticmethod
     @keyword(name="Get game info from game page")
     def get_game_info_from_game_page(page: SteamGamePage):
-        game_info = SteamGameInfo.get_steam_game(page.purchase_game_block.element)
+        game_info = SteamGameInfo.get_steam_game(page.purchase_game_block)
         info(f'Got an info for game: {game_info!r}')
         return game_info
 

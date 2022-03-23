@@ -14,7 +14,7 @@ class SteamStorePage(SteamMainPage):
     def __init__(self, browser: Browser, genre):
         super().__init__(browser)
         self.expected_genre_link = genre
-        self.game_carousel = BrowserElement('xpath', self.STEAM_STORE_GAMES_CAROUSEL_LOCATOR, browser)
+        self.game_carousel = BrowserElement.from_locator('xpath', self.STEAM_STORE_GAMES_CAROUSEL_LOCATOR)
 
     @property
     def current_genre(self):

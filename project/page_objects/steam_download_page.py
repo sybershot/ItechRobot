@@ -16,7 +16,7 @@ class SteamDownloadPage(BasePage):
 
     def __init__(self, browser: Browser):
         super().__init__(browser)
-        self._download_button = BrowserElement('xpath', DOWNLOAD_BUTTON_LOCATOR, browser)
+        self._download_button = BrowserElement.from_locator('xpath', DOWNLOAD_BUTTON_LOCATOR)
         self.download_link = self._download_button.element.get_attribute('href')
 
     def download(self):

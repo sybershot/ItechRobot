@@ -12,9 +12,9 @@ ERROR_MESSAGE_VISIBLE_LOCATOR = '//*[@id="error_display" and @style=""]'
 class SteamLoginPage(BasePage):
     def __init__(self, browser: Browser):
         super().__init__(browser)
-        self.login_button = BrowserElement('xpath', LOGIN_BUTTON_LOCATOR, browser)
-        self.username_input = BrowserElement('xpath', USERNAME_FIELD_LOCATOR, browser)
-        self.password_input = BrowserElement('xpath', PASSWORD_FIELD_LOCATOR, browser)
+        self.login_button = BrowserElement.from_locator('xpath', LOGIN_BUTTON_LOCATOR)
+        self.username_input = BrowserElement.from_locator('xpath', USERNAME_FIELD_LOCATOR)
+        self.password_input = BrowserElement.from_locator('xpath', PASSWORD_FIELD_LOCATOR)
 
     @property
     def error_message_box(self):

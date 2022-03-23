@@ -1,9 +1,16 @@
+from typing import List
+
 from robot.api.deco import keyword
-from robot.api.logger import info
+from robot.api.logger import info, debug
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from configuration.constants import TIMEOUT
+from framework.utils.robot_browser.browser_element import BrowserElement
+
+
+class ElementNotFound(Exception):
+    pass
 
 
 class Browser:
@@ -35,6 +42,13 @@ class Browser:
         self.driver.save_screenshot(image_path)
         info(f'<img src="{image_path}">', html=True)
 
-    def find_elements(self, by, locator):
+    def find_elements(self, by, locator) -> List[BrowserElement]:
         info(f'Searching all elements by {by!r} {locator!r}')
-        return self.driver.find_elements(by, locator)
+        return [BrowserElement(e, by, locator) for e in self.driver.find_elements(by, locator)]
+
+    def find_element_or_raise(self, by, locator) -> BrowserElement:
+        debug(f'Searching element {by!r} {locator!r}')
+        if element := WebDriverWait(self.driver, TIMEOUT).until(EC.presence_of_element_located((by, locator))):
+            return BrowserElement(element, by, locator)
+        else:
+            raise ElementNotFound(f'Failed to find element {by!r} {locator!r}!')

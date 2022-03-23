@@ -5,6 +5,8 @@ from typing import List
 from robot.api.logger import info
 from selenium.webdriver.remote.webelement import WebElement
 
+from framework.utils.robot_browser.browser_element import BrowserElement
+
 PRICE_PATTERN = r"[-+]?(\d*\.?\d+|\d+)"
 
 
@@ -29,36 +31,36 @@ class SteamGameInfo:
         return re.search(PRICE_PATTERN, price.replace(*SteamGameInfo.COMMA_DOT))
 
     @staticmethod
-    def get_steam_game(web_element: WebElement):
+    def get_steam_game(web_element: BrowserElement):
         info(f'Recieved game item:\n')
-        info(f'<img src="data:image/png;base64, {web_element.screenshot_as_base64}">', html=True)
+        web_element.log_screenshot()
 
         orig_price = 0.0
         final_price = 0.0
         discount = 0.0
 
         if game_name_element := web_element.find_elements('xpath', SteamGameInfo.GAME_NAME_SELECTOR):
-            name = game_name_element[0].text
+            name = game_name_element[0].element.text
         else:
-            name = web_element.find_element('xpath', SteamGameInfo.APPHUB_GAME_NAME_SELECTOR).text
+            name = web_element.find_element('xpath', SteamGameInfo.APPHUB_GAME_NAME_SELECTOR).element.text
 
         platform_elements = web_element.find_elements('xpath', SteamGameInfo.PLATFORM_SELECTOR)
-        supported_os = [i.get_attribute('class').split()[-1] for i in platform_elements]
+        supported_os = [i.element.get_attribute('class').split()[-1] for i in platform_elements]
 
         #  Check if the game has discount
         if game_item := web_element.find_elements('xpath', SteamGameInfo.DISCOUNT_PCT_SELECTOR):
-            discount_text = web_element.find_element('xpath', SteamGameInfo.DISCOUNT_PRICES_SELECTOR).text
+            discount_text = web_element.find_element('xpath', SteamGameInfo.DISCOUNT_PRICES_SELECTOR).element.text
             orig_price, final_price = discount_text.split("\n")
             orig_price = float(SteamGameInfo.find_price(orig_price)[0])
             final_price = float(SteamGameInfo.find_price(final_price)[0])
-            discount = abs(float(game_item[0].text[:-1]) / 100)
+            discount = abs(float(game_item[0].element.text[:-1]) / 100)
         else:
             # Check if the game has price element
             if dirty_price := web_element.find_elements('xpath', SteamGameInfo.DISCOUNT_PRICES_SELECTOR):
-                dirty_price = dirty_price[0].text
+                dirty_price = dirty_price[0].element.text
             # This check is needed when searching for a game price when on game's page
             elif dirty_price := web_element.find_elements('xpath', SteamGameInfo.GAME_PRICE_APPHUB_SELECTOR):
-                dirty_price = dirty_price[0].text
+                dirty_price = dirty_price[0].element.text
             else:
                 dirty_price = ""
 
