@@ -1,5 +1,4 @@
 from typing import List
-
 from robot.api.deco import keyword
 from robot.api.logger import info, debug
 from selenium.webdriver.remote.webdriver import WebDriver

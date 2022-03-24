@@ -3,12 +3,10 @@ import random
 import re
 import urllib.parse
 from typing import List
-
 from robot.api.deco import keyword
 from robot.output.librarylogger import info
 from selenium.webdriver.remote.webelement import WebElement
 from smart_assertions import soft_assert, verify_expectations
-
 from framework.utils.robot_browser.browser_element import BrowserElement
 from project.dataclasses.steam_game_info import SteamGameInfo, PRICE_PATTERN
 from project.page_objects.steam_game_page import SteamGamePage

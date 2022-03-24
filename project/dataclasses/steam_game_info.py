@@ -1,10 +1,7 @@
 import re
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import List
-
 from robot.api.logger import info
-from selenium.webdriver.remote.webelement import WebElement
-
 from framework.utils.robot_browser.browser_element import BrowserElement
 
 PRICE_PATTERN = r"[-+]?(\d*\.?\d+|\d+)"
@@ -32,7 +29,7 @@ class SteamGameInfo:
 
     @staticmethod
     def get_steam_game(web_element: BrowserElement):
-        info(f'Recieved game item:\n')
+        info(f'Received game item:\n')
         web_element.log_screenshot()
 
         orig_price = 0.0

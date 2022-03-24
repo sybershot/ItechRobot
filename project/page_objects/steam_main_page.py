@@ -1,9 +1,4 @@
-from typing import List
-
-from selenium.webdriver.remote.webelement import WebElement
 from framework.utils.base_page.base_page import BasePage
-
-
 from framework.utils.robot_browser.browser import Browser
 from framework.utils.robot_browser.browser_element import BrowserElement
 
