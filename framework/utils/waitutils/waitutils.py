@@ -15,8 +15,8 @@ class WaitUtils:
             start = time.time()
             while time.time() < start + seconds:
                 try:
-                    if result := func(*args, **kwargs) != False:
-                        return result
+                    if bool(func(*args, **kwargs)):
+                        return True
                     else:
                         raise Exception
                 except:
