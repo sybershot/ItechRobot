@@ -1,32 +1,32 @@
 import os
-import pathlib
+import time
 
 from requests import get
 from robot.output.librarylogger import info
 
 from configuration.constants import DOWNLOADS_PATH
-from framework.utils.base_page.base_page import BasePage
-from framework.utils.robot_browser.browser import Browser
-from framework.utils.robot_browser.browser_element import BrowserElement
-
-DOWNLOAD_BUTTON_LOCATOR = '//a[@class="about_install_steam_link"]'
+from itechframework.modules.base_page.base_page import BasePage
 
 
 class SteamDownloadPage(BasePage):
+    DOWNLOAD_BUTTON_LOCATOR = '//a[@class="about_install_steam_link"]'
 
-    def __init__(self, browser: Browser):
-        super().__init__(browser)
-        self._download_button = BrowserElement.from_locator('xpath', DOWNLOAD_BUTTON_LOCATOR)
-        self.download_link = self._download_button.element.get_attribute('href')
+    def __init__(self):
+        super().__init__()
+        self.download_button = self.browser.find_element_or_raise('xpath', SteamDownloadPage.DOWNLOAD_BUTTON_LOCATOR)
 
-    def download(self):
-        if not pathlib.Path(DOWNLOADS_PATH).exists():
-            os.mkdir(pathlib.Path(DOWNLOADS_PATH))
-        file_path = pathlib.Path(DOWNLOADS_PATH, "SteamSetup.exe")
-        res = get(self.download_link)
-        if res.status_code == 200:
-            info("Successfully downloaded steam installer.")
-            with open(file_path, "wb") as installer:
-                installer.write(res.content)
-        else:
-            raise Exception("Failed to download steam installer!")
+    def get_download_link(self):
+        return self.download_button.element.get_attribute('href')
+
+    def download(self, timeout=10):
+        file_path = os.path.join(DOWNLOADS_PATH, "steam_installer.exe")
+        start = time.time()
+        with get(self.get_download_link(), stream=True) as r:
+            r.raise_for_status()
+            with open(file_path, 'wb') as f:
+                for chunk in r.iter_content(chunk_size=8192):
+                    if time.time() < start + timeout:
+                        f.write(chunk)
+                    else:
+                        raise Exception(f'Timeout: download took too long!')
+        info("Successfully downloaded steam installer.")

@@ -1,26 +1,20 @@
 from robot.api.deco import keyword
 from robot.libraries.BuiltIn import BuiltIn
 
-from framework.utils.robot_browser.browser import Browser
-from project.page_objects.steam_main_page import SteamMainPage
-
-STEAM_URL = 'https://store.steampowered.com/'
+from itechframework.configuration.constants import BROWSER_TYPE
+from itechframework.modules.browser_manager.browser_manager import BrowserManager
 
 
 class CommonSteps:
 
     @staticmethod
     @keyword(name="Go to steam page")
-    def go_to_steam_page(browser: Browser):
-        browser.go_to(STEAM_URL)
-        return SteamMainPage(browser)
-
-    @staticmethod
-    @keyword(name='Save page screenshot')
-    def save_page_screenshot(page, file_name):
-        page.save_screenshot(file_name)
+    def go_to_steam_page():
+        browser = BrowserManager().get_browser(BROWSER_TYPE)
+        browser.go_to('https://store.steampowered.com/')
 
     @staticmethod
     @keyword(name='Validate page is')
-    def validate_page_is(browser: Browser, expected_url):
+    def validate_page_is(expected_url):
+        browser = BrowserManager().get_browser(BROWSER_TYPE)
         BuiltIn().should_be_equal(browser.get_location(), expected_url)

@@ -31,13 +31,14 @@ Simple task using SeleniumLibrary and RobotFramework.
 - Robot Framework 4.1.3
 - Selenium 0.30
 - Webdriver Manager 3.5.2
+- smart-assertions 1.0.2
 
-Dependencies are listed in requirements.txt.
+Dependencies are listed in `requirements.txt`.
 
 # Usage
-Tests (or tasks) are executed from the command line using the robot command or by executing the robot module directly like python -m robot or jython -m robot:
+Tests are executed from the command line using the robot command or by executing the robot module directly like python -m robot or jython -m robot:
 ```
-robot [path to .robot file]
+python3 -m robot.run [path_to_robot_file]
 ```
 All tests are located in `project/tests` folder.
 

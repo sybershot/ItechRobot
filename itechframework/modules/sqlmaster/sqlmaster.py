@@ -1,8 +1,6 @@
-from typing import Dict
-
 from pymysql import connect, cursors
 
-from configuration.constants import MYSQL_SERVER_HOST, MYSQL_PORT, DB_NAME
+from itechframework.configuration.constants import MYSQL_SERVER_HOST, MYSQL_PORT, DB_NAME
 
 
 class SQLMaster:
