@@ -2,18 +2,16 @@
 Documentation  Verifies ability to download steam client app
 Default Tags  Smoke
 
-Variables  configuration/constants.py
-Library  framework/utils/browser_manager/BrowserManager.py
-Library  project/steps/CommonSteps.py
-Library  project/steps/SteamDownloadSteps.py
-Resource  project/resource.robot
+Resource  itechframework/resource/Common.robot
+Library  project.steps.SteamDownloadSteps
 
-Suite Setup  Test Setup
-Suite Teardown  Test Teardown
-Test Teardown  Run keyword if test failed  Fatal Error  Step Failed
+Suite Setup  Open Browser
+Suite Teardown  Close Browser
+
 
 *** Test Cases ***
 
 Download Steam Client
-    ${page_object} =  Go To Download Page  ${page_object}
-    Click Download Button  ${page_object}
+    Go To Steam Page
+    Go To Download Page
+    Click Download Button

@@ -8,11 +8,12 @@ class SteamDownloadSteps:
 
     @staticmethod
     @keyword(name="Go to download page")
-    def go_to_download_page(page: SteamMainPage):
+    def go_to_download_page():
+        page = SteamMainPage()
         page.click_install_steam()
-        return SteamDownloadPage(page.browser)
 
     @staticmethod
     @keyword(name="Click download button")
-    def click_download_button(page: SteamDownloadPage):
+    def click_download_button():
+        page = SteamDownloadPage()
         page.download()
