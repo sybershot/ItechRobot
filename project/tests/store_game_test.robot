@@ -2,7 +2,7 @@
 Documentation  Verifies ability to use store module
 Default Tags  Smoke
 
-Resource  itechframework/resource/Common.robot
+Resource  project/resource/Common.robot
 Library  project.steps.SteamStoreSteps
 
 Suite Setup  Open Browser

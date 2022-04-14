@@ -1,7 +1,7 @@
 from robot.api.deco import keyword
 from robot.libraries.BuiltIn import BuiltIn
 
-from itechframework.configuration.constants import BROWSER_TYPE
+from itechframework.configuration.config import BROWSER_TYPE
 from itechframework.modules.browser_manager.browser_manager import BrowserManager
 
 

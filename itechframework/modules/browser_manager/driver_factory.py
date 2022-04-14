@@ -5,7 +5,7 @@ from webdriver_manager.microsoft import IEDriverManager, EdgeChromiumDriverManag
 from webdriver_manager.opera import OperaDriverManager
 from webdriver_manager.utils import ChromeType
 
-from itechframework.modules.browser_manager.drivermanager_config import DRIVERS_LOCATION
+from itechframework.configuration.config import DRIVERS_LOCATION
 
 
 class UnsupportedBrowser(Exception):

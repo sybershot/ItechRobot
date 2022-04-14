@@ -2,7 +2,7 @@
 Documentation  Verifies ability to download steam client app
 Default Tags  Smoke
 
-Resource  itechframework/resource/Common.robot
+Resource  project/resource/Common.robot
 Library  project.steps.SteamDownloadSteps
 
 Suite Setup  Open Browser

@@ -1,9 +1,9 @@
 from pymysql import connect, cursors
 
-from itechframework.configuration.constants import MYSQL_SERVER_HOST, MYSQL_PORT, DB_NAME
+from itechframework.configuration.config import MYSQL_SERVER_HOST, MYSQL_PORT, DB_NAME
 
 
-class SQLMaster:
+class Connection:
 
     def __init__(self, login, password):
         self.login = login

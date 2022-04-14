@@ -3,7 +3,7 @@ from robot.api.deco import keyword
 from itechframework.modules.browser_manager.browser_manager import BrowserManager
 
 
-class BrowMan:
+class BrowManRobot:
 
     @staticmethod
     @keyword(name="Get Browser")

@@ -4,7 +4,7 @@ import time
 from requests import get
 from robot.output.librarylogger import info
 
-from configuration.constants import DOWNLOADS_PATH
+from project.configuration.constants import DOWNLOADS_PATH
 from itechframework.modules.base_page.base_page import BasePage
 
 

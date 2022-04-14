@@ -8,7 +8,7 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
-from itechframework.configuration.constants import TIMEOUT
+from itechframework.configuration.config import TIMEOUT
 from itechframework.modules.robot_browser.browser_element import BrowserElement
 from itechframework.modules.waitutils import waituntiltrue
 

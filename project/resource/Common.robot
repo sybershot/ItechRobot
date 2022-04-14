@@ -1,7 +1,7 @@
 *** Settings ***
-Variables  configuration/constants.py
-Variables  itechframework/configuration/constants.py
-Library  itechframework.resource.BrowMan
+Variables  project/configuration/constants.py
+Variables  itechframework/configuration/config.py
+Library  itechframework.modules.browser_manager.BrowManRobot
 Library  project.steps.CommonSteps
 
 

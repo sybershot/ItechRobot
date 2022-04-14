@@ -4,3 +4,4 @@ MYSQL_SERVER_HOST = 'localhost'
 MYSQL_PORT = 3036
 DB_NAME = 'sys'
 COOKIES_PATH = 'project/cookies'
+DRIVERS_LOCATION = 'project/drivers'

@@ -2,7 +2,7 @@ from robot.api.logger import info, debug, warn
 from selenium.common.exceptions import StaleElementReferenceException, ElementClickInterceptedException
 from selenium.webdriver import ActionChains
 
-from itechframework.configuration.constants import BROWSER_TYPE
+from itechframework.configuration.config import BROWSER_TYPE
 from itechframework.modules.waitutils import waituntiltrue
 
 

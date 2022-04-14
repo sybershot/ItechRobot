@@ -1,1 +1,1 @@
-__all__ = ["base_page", "browser_manager", "robot_browser", "sqlmaster", "waitutils"]
+__all__ = ["base_page", "browser_manager", "robot_browser", "sql", "waitutils"]
