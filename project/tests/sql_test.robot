@@ -2,7 +2,7 @@
 Documentation  Verifies ability to send SQL requests using python
 Default Tags  Smoke
 
-Variables  project/resource/Common.robot
+Variables  project/resource/resource.robot
 Library  project/steps/SQLSteps.py
 
 *** Test Cases ***

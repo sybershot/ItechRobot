@@ -1,6 +1,6 @@
 from robot.api.deco import keyword
 
-from itechframework.modules.loaders.json_loader import JsonLoader
+from itechframework.modules.utils.json_utils import JsonLoader
 from project.page_objects.steam_login_page import SteamLoginPage
 from project.page_objects.steam_main_page import SteamMainPage
 

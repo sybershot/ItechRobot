@@ -1,5 +1,5 @@
 from itechframework.modules.robot_browser.browser import Browser
-from itechframework.modules.robot_browser.meta_singleton import MetaSingleton
+from itechframework.modules.browser_manager.meta_singleton import MetaSingleton
 from .driver_factory import DriverFactory
 
 

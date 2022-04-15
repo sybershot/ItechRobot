@@ -2,7 +2,7 @@
 Documentation  Verifies error assertion with invalid login credentials
 Default Tags  Smoke
 
-Resource  project/resource/Common.robot
+Resource  project/resource/resource.robot
 Library  project.steps.SteamLoginSteps
 
 Suite Setup  Open Browser

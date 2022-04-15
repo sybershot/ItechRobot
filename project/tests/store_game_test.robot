@@ -2,7 +2,7 @@
 Documentation  Verifies ability to use store module
 Default Tags  Smoke
 
-Resource  project/resource/Common.robot
+Resource  project/resource/resource.robot
 Library  project.steps.SteamStoreSteps
 
 Suite Setup  Open Browser
@@ -10,7 +10,7 @@ Suite Teardown  Close Browser
 
 
 *** Variables ***
-${quantity_of_games}  ${3}
+${quantity_of_games}  ${1}
 
 *** Test Cases ***
 

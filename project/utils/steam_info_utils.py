@@ -13,7 +13,7 @@ class SteamInfoGrabber:
 
     @staticmethod
     def get_steam_game(browser_element: BrowserElement):
-        web_element = browser_element.element
+        web_element = browser_element.browser.driver.find_element(browser_element.by, browser_element.locator)
         orig_price = 0.0
         final_price = 0.0
         discount = 0.0

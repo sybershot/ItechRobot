@@ -12,24 +12,25 @@ from project.entities.steam_game_info import SteamGameInfo
 from project.page_objects.steam_game_page import SteamGamePage
 from project.page_objects.steam_main_page import SteamMainPage
 from project.page_objects.steam_store_page import SteamStorePage
-from project.utils.steam_info_grabber import SteamInfoGrabber
+from project.utils.steam_info_utils import SteamInfoGrabber
 
 
 class SteamStoreSteps:
-
     STEAM_SUBGENRES_LOCATOR = './child::a[@class="popup_menu_item"]'
 
     @staticmethod
     @keyword(name="Choose random category")
     def choose_random_category():
         page = SteamMainPage()
-        genres = page.get_genres()
+        categories = page.get_categories()
+        chosen_category = random.choice(categories)
+        category = page.browser.driver.find_element(chosen_category.by, chosen_category.locator)
+        genres = category.find_elements('xpath', SteamStoreSteps.STEAM_SUBGENRES_LOCATOR)
         genre = random.choice(genres)
-        subgenres = genre.element.find_elements('xpath', SteamStoreSteps.STEAM_SUBGENRES_LOCATOR)
-        subgenre = BrowserElement(random.choice(subgenres), 'xpath', SteamStoreSteps.STEAM_SUBGENRES_LOCATOR)
-        genre_link = os.path.dirname(urllib.parse.urlsplit(subgenre.element.get_attribute('href')).path)
+        genre_link = os.path.dirname(urllib.parse.urlsplit(genre.get_attribute('href')).path)
         info(f'Got expected genre url: {genre_link}')
-        subgenre.click_element()
+        genre = page.browser.find_element_or_raise('xpath', f'//a[contains(@href,{genre_link!r})]')
+        genre.click_element()
         return genre_link
 
     @staticmethod

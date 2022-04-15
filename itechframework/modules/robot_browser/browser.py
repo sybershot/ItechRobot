@@ -10,7 +10,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 from itechframework.configuration.config import TIMEOUT
 from itechframework.modules.robot_browser.browser_element import BrowserElement
-from itechframework.modules.waitutils import waituntiltrue
+from itechframework.modules.utils import waituntiltrue
 
 
 class Browser:
@@ -44,12 +44,12 @@ class Browser:
 
     def find_elements(self, by, locator) -> List[BrowserElement]:
         info(f'Searching all elements by {by!r} {locator!r}')
-        return [BrowserElement(e, by, locator) for e in self.driver.find_elements(by, locator)]
+        return [BrowserElement(by, locator) for _ in self.driver.find_elements(by, locator)]
 
     def find_element_or_raise(self, by, locator, timeout=TIMEOUT) -> BrowserElement:
         debug(f'Searching element {by!r} {locator!r}')
-        if element := WebDriverWait(self.driver, timeout).until(EC.presence_of_element_located((by, locator))):
-            return BrowserElement(element, by, locator)
+        if WebDriverWait(self.driver, timeout).until(EC.presence_of_element_located((by, locator))):
+            return BrowserElement(by, locator)
         else:
             raise NoSuchElementException(f'Failed to find element {by!r} {locator!r}!')
 

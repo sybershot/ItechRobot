@@ -18,3 +18,13 @@ class CommonSteps:
     def validate_page_is(expected_url):
         browser = BrowserManager().get_browser(BROWSER_TYPE)
         BuiltIn().should_be_equal(browser.get_location(), expected_url)
+
+    @staticmethod
+    @keyword(name="Get Browser")
+    def get_browser(browser_type):
+        return BrowserManager().get_browser(browser_type)
+
+    @staticmethod
+    @keyword(name="Destroy Browser")
+    def destroy_browser(browser):
+        BrowserManager().close_browser(browser)
