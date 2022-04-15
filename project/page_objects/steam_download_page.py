@@ -1,5 +1,5 @@
 from itechframework.modules.base_page.base_page import BasePage
-from project.utils.download_utils import DownloadUtils
+from itechframework.modules.utils.download_utils import DownloadUtils
 
 
 class SteamDownloadPage(BasePage):

@@ -10,8 +10,8 @@ from project.configuration.constants import DOWNLOADS_PATH
 class DownloadUtils:
 
     @staticmethod
-    def download(url, timeout):
-        file_path = os.path.join(DOWNLOADS_PATH, "steam_installer.exe")
+    def download(url, timeout, file_mane="content.exe"):
+        file_path = os.path.join(DOWNLOADS_PATH, file_mane)
         start = time.time()
         with get(url, stream=True) as r:
             r.raise_for_status()
