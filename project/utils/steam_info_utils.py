@@ -1,8 +1,8 @@
 import re
 
 from robot.api.logger import info
+from selenium.webdriver.remote.webelement import WebElement
 
-from itechframework.modules.robot_browser.browser_element import BrowserElement
 from project.entities.steam_game_info import SteamGameInfo
 
 PRICE_PATTERN = r"[-+]?(\d*\.?\d+|\d+)"
@@ -12,8 +12,7 @@ class SteamInfoGrabber:
     DISCOUNT_PRICES_LOCATOR = './/div[@class="discount_prices"]'
 
     @staticmethod
-    def get_steam_game(browser_element: BrowserElement):
-        web_element = browser_element.browser.driver.find_element(browser_element.by, browser_element.locator)
+    def get_steam_game(web_element: WebElement):
         orig_price = 0.0
         final_price = 0.0
         discount = 0.0

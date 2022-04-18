@@ -1,4 +1,5 @@
 from itechframework.modules.base_page.base_page import BasePage
+from itechframework.modules.robot_browser.browser_element import BrowserElement
 
 
 class SteamLoginPage(BasePage):
@@ -10,10 +11,10 @@ class SteamLoginPage(BasePage):
 
     def __init__(self):
         super().__init__()
-        self.username_input = self.browser.find_element_or_raise('xpath', SteamLoginPage.USERNAME_FIELD_LOCATOR)
-        self.password_input = self.browser.find_element_or_raise('xpath', SteamLoginPage.PASSWORD_FIELD_LOCATOR)
-        self.login_button = self.browser.find_element_or_raise('xpath', SteamLoginPage.LOGIN_BUTTON_LOCATOR)
-        self.error_message_box = self.browser.find_element_or_raise('xpath', SteamLoginPage.ERROR_MESSAGE_BOX_LOCATOR)
+        self.username_input = BrowserElement('xpath', SteamLoginPage.USERNAME_FIELD_LOCATOR)
+        self.password_input = BrowserElement('xpath', SteamLoginPage.PASSWORD_FIELD_LOCATOR)
+        self.login_button = BrowserElement('xpath', SteamLoginPage.LOGIN_BUTTON_LOCATOR)
+        self.error_message_box = BrowserElement('xpath', SteamLoginPage.ERROR_MESSAGE_BOX_LOCATOR)
 
     def login(self, login, password):
         self.username_input.input_text(login)

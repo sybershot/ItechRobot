@@ -11,11 +11,10 @@ class SteamMainPage(BasePage):
 
     def __init__(self):
         super().__init__()
-        self.login_button = self.browser.find_element_or_raise('xpath', '//a[@class="global_action_link"]')
-        self.install_steam_button = self.browser.find_element_or_raise('xpath',
-                                                                       '//a[@class="header_installsteam_btn_content"]')
-        self.steam_genre_menu = self.browser.find_element_or_raise('xpath', '//div[@id="genre_tab"]')
-        self.search_bar = self.browser.find_element_or_raise('xpath', '//input[@id="store_nav_search_term"]')
+        self.login_button = BrowserElement('xpath', '//a[@class="global_action_link"]')
+        self.install_steam_button = BrowserElement('xpath', '//a[@class="header_installsteam_btn_content"]')
+        self.steam_genre_menu = BrowserElement('xpath', '//div[@id="genre_tab"]')
+        self.search_bar = BrowserElement('xpath', '//input[@id="store_nav_search_term"]')
 
     def click_login(self):
         self.login_button.click_element()
@@ -33,8 +32,8 @@ class SteamMainPage(BasePage):
         self.search_bar.click_element()
         self.search_bar.input_text(game_title)
         self.browser.wait_until_visible('xpath', '//div[contains(@class, "search_suggest")]')
-        game = self.browser.find_element_or_raise('xpath', '//a[contains(@class, "match")]')
-        result = SteamInfoGrabber.get_steam_game(game)
+        game = BrowserElement('xpath', '//a[contains(@class, "match")]')
+        result = SteamInfoGrabber.get_steam_game(self.browser.find_element_or_raise(game.by, game.locator))
         game.click_element()
         return result
 

@@ -23,13 +23,12 @@ class SteamStoreSteps:
     def choose_random_category():
         page = SteamMainPage()
         categories = page.get_categories()
-        chosen_category = random.choice(categories)
-        category = page.browser.driver.find_element(chosen_category.by, chosen_category.locator)
+        category = random.choice(categories)
         genres = category.find_elements('xpath', SteamStoreSteps.STEAM_SUBGENRES_LOCATOR)
         genre = random.choice(genres)
         genre_link = os.path.dirname(urllib.parse.urlsplit(genre.get_attribute('href')).path)
         info(f'Got expected genre url: {genre_link}')
-        genre = page.browser.find_element_or_raise('xpath', f'//a[contains(@href,{genre_link!r})]')
+        genre = BrowserElement('xpath', f'//a[contains(@href,{genre_link!r})]')
         genre.click_element()
         return genre_link
 
@@ -64,7 +63,8 @@ class SteamStoreSteps:
     @keyword(name="Get game info from game page")
     def get_game_info_from_game_page():
         page = SteamGamePage()
-        game_info = SteamInfoGrabber.get_steam_game(page.purchase_game_block)
+        game_info = SteamInfoGrabber.get_steam_game(page.browser.find_element_or_raise(page.purchase_game_block.by,
+                                                                                       page.purchase_game_block.locator))
         info(f'Parsed game: {game_info!r}')
         return game_info
 
